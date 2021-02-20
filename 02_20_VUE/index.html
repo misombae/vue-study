@@ -15,7 +15,15 @@
     <!-- 마크업 - DOM 뷰(view) -->
     <div id="app">
         <h1> 자바스크립트 프레임 워크 Vue.js 공부하기 </h1>
-        <h2> 뷰 데이터 속성 바인딩 하기: {{ msg }} 머스테시 안에 바인딩 속성 넣기 </h2>
+
+        <!-- 
+             v-on: 디랙티브 @사용가능
+             v-bind: 속성지정 : 사용가능
+             
+             h2를 클릭하여 msg 데이터 속성을 변경하는 이벤트 실행  
+             v-on:click='함수호출' method 호출하여 msg 속성 값을 변경 바인딩 한다.
+        -->
+        <h2 @click='ggoggo'> 뷰 데이터 속성 바인딩 하기: {{ msg }} 머스테시 안에 바인딩 속성 넣기 </h2>
         <p> {{ txt }} </p>
         <hr>
     </div>
@@ -27,35 +35,69 @@
             data:{  //속성 방식 
                 msg: '자바스크립트 data',
                 txt: 'JAVASCRIPT VUE.JS'
+            }, 
+            methods: {
+                ggoggo: function() {
+                    var me = this; 
+                    //alert('메서드 호출 실행');
+                    me.msg = 'Vue.js'; //msg 속성 변경 
+                    me.txt = 'Hello Vue.js!';
+               }
             }
         }); 
         </script>
 
     <div id="header">
         <h1> MVVM 모델 </h1>
-        <h2> {{ msg }} </h2>
-        <p> {{ babo}} </p>
+        <h2 v-on:click='ggagga'> {{ msg }} </h2>
+        <p> {{ babo }} </p>
     </div>
-
+    <hr>
     <script>
         var headerObj = new Vue({
             el:'#header',
             //ES5: data:function(){} 
             //ES6: data(){}
             data(){ //메서드 방식은 반드시 return { property : value } 
-            return {
-                msg: 'MVVM 패턴',
-                babo: 50000
+                return {
+                    msg: 'MVVM 패턴',
+                    babo: 50000
+                }
+            },
+            methods:{
+                ggagga() {
+                    this.msg = '대한민국 만세!!!';
+                    this.babo = 1000000;
+                }
             }
-        }
     })
     </script>
-    
+
+    <div id="header1">
+        <h2 @click='ggagga1'>{{msg}}</h2>
+    </div>
+
+    <script>
+        var headerObj1 = new Vue({
+            el: '#header1',
+            data(){
+                return {
+                    msg: 'vue.js'
+                }
+            },
+            methods:{
+                ggagga1: function() {
+                    this.msg = '2021-02-20 Vue.js study ';
+                }
+            }
+        })
+    </script>
+
     <!-- 스타일 -->
     <style>
         #wrap { width:1000px; margin:0 auto; background: #f0f0f0; padding:100px 0;}
         #app {text-align:center;}
-        #header {text-align:center;}
+        #header, #header1 {text-align:center;}
         h2, p { color: #39b; background: #ddd; display: inline-flex; padding: 10px 20px; font-size: 20px; font-weight: normal;}
     </style>
 </div>
