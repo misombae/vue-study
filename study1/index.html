@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>웹문서</title>
+
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.6.12/dist/vue.js"></script>
+</head>
+<body>
+    <h1></h1>
+
+    <!--div>ul>li*6
+    shit+alt+ctrl -->
+    <div>
+        <ul>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+        </ul>
+    </div>
+
+    <!--div>{lorem}-->
+    <div>lorem</div> 
+
+    <div></div>
+    <div></div>
+    <div></div>
+
+    <!--div>ul>li*3^^div>ul>li*3-->
+    <div>
+        <ul>
+            <li></li>
+            <li></li>
+            <li></li>
+        </ul>
+    </div>
+    <div>
+        <ul>
+            <li></li>
+            <li></li>
+            <li></li>
+        </ul>
+    </div>
+
+    <!--
+    $번호 자동 생성 #아이디 .클래스 
+    div#section>ul>li.slide.slide$*5
+    -->
+    <div id="section">
+        <ul>
+            <li class="slide slide1"></li>
+            <li class="slide slide2"></li>
+            <li class="slide slide3"></li>
+            <li class="slide slide4"></li>
+            <li class="slide slide5"></li>
+        </ul>
+    </div>
+
+    <!--div#gallery>ul>li*8.gallery-img>img[src=./img/image$$.jpg]-->
+    <div id="gallery">
+        <ul>
+            <li class="gallery-img"><img src="./img/image01.jpg" alt=""></li>
+            <li class="gallery-img"><img src="./img/image02.jpg" alt=""></li>
+            <li class="gallery-img"><img src="./img/image03.jpg" alt=""></li>
+            <li class="gallery-img"><img src="./img/image04.jpg" alt=""></li>
+            <li class="gallery-img"><img src="./img/image05.jpg" alt=""></li>
+            <li class="gallery-img"><img src="./img/image06.jpg" alt=""></li>
+            <li class="gallery-img"><img src="./img/image07.jpg" alt=""></li>
+            <li class="gallery-img"><img src="./img/image08.jpg" alt=""></li>
+        </ul>
+    </div>
+
+     <!--div#gallery>ul>li*8.gallery-img>img[src=./img/image$$@7.jpg]-->
+     <div id="gallery">
+         <ul>
+             <li class="gallery-img"><img src="./img/image07.jpg" alt=""></li>
+             <li class="gallery-img"><img src="./img/image08.jpg" alt=""></li>
+             <li class="gallery-img"><img src="./img/image09.jpg" alt=""></li>
+             <li class="gallery-img"><img src="./img/image10.jpg" alt=""></li>
+             <li class="gallery-img"><img src="./img/image11.jpg" alt=""></li>
+             <li class="gallery-img"><img src="./img/image12.jpg" alt=""></li>
+             <li class="gallery-img"><img src="./img/image13.jpg" alt=""></li>
+             <li class="gallery-img"><img src="./img/image14.jpg" alt=""></li>
+         </ul>
+     </div>
+
+    <!--alt+b , shift+alt+b -->
+    <!--vue.js devtools 크롬 확장 추가 -->
+</body>
+</html>
