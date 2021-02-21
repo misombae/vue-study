@@ -5,8 +5,152 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title> 뷰 인스턴스 만들기 & 자바스크립트 클래스(객체와 함수) </title>
+
+    <style>
+        table {width: 1000px; margin: 0 auto;}
+        table td, th{border: 1px solid #ccc; height: 50px; text-align: center;}
+        table#table td:nth-child(2){text-align: left;}
+    </style>
 </head>
 <body>
     
+    <h1>리터럴 방식 클래스 인스턴스 만들기 </h1>
+    <h2>주소부</h2>
+    <table id='table'></table><hr>
+    <table id='sungjuk'></table><hr>
+    <table id='table2'></table>
+
+    <script>
+        /*
+        var app = new Object(); //객체생성방식1-생성자 방식 
+        var app = {} //객체생성방식2- 리터럴 방식 
+        var app = new Array(); //배열생성방식1-생성자 방식 
+        var app = [] //배열생성방식2 - 리터럴 방식
+        */
+
+        //인스턴스(객체)
+        var vueInstance = {
+            cnt: 0,     //프로퍼티(멤버변수)
+            el: '<h1>프로퍼티(멤버변수)탬플릿</h1>',
+            me: ['피자', '닭칼국수', '김밥', '라면', '스파게티'], 
+            main: {  
+                student: [ 
+                    { 번호:1, 이름:'이순신', KOR:100, ENG:090, MAT:095 }, 
+                    { 번호:2, 이름:'박순실', KOR:090, ENG:093, MAT:091 },
+                    { 번호:3, 이름:'이혁재', KOR:080, ENG:091, MAT:092 },
+                    { 번호:4, 이름:'조지현', KOR:070, ENG:092, MAT:093 },
+                    { 번호:5, 이름:'홍우현', KOR:100, ENG:094, MAT:094 }
+                ],
+                address: [
+                    { 이름:'이순신', 주소:'서울시 서초구 서초동 송림빌딩 1번지'},
+                    { 이름:'박순실', 주소:'서울시 서초구 서초동 송림빌딩 2번지'},
+                    { 이름:'이혁재', 주소:'서울시 서초구 서초동 송림빌딩 3번지'},
+                    { 이름:'조지현', 주소:'서울시 서초구 서초동 송림빌딩 4번지'},
+                    { 이름:'홍우현', 주소:'서울시 서초구 서초동 송림빌딩 5번지'},
+                ]
+            },
+
+            addrTable: function() { //주소 탬플릿에 출력
+                var txt = '';
+                var $table = document.querySelector('#table');
+                txt = '<tr><th>이름</th><th>주소</th></tr>'; 
+                this.main.address.forEach(function(el, index, arr){
+                    txt += '<tr><td>' + el.이름 + '</td><td>' + el.주소 + '</td></tr>';
+                });
+                $table.innerHTML = txt;
+            },
+
+            studentTable: function() {
+                var txt = '';
+                var $sungjuk = document.querySelector('#sungjuk');
+                txt = '<tr><th>번호</th><th>이름</th><th>KOR</th><th>ENG</th><th>MAT</th></tr>'
+                this.main.student.forEach(function(el, index, arr) {
+                    txt += '<tr><td>'+ el.번호 +'</td><td>'+ el.이름 +'</td><td>'+ el.KOR+'</td><td>'+ el.ENG 
+                        +'</td><td>'+el.MAT+'</td></tr>'
+                });
+                $sungjuk.innerHTML = txt;
+            },
+
+            init: function() { //메서드(멤버함수)
+                this.cnt = 500;
+                this.el += '<h2>프로퍼티(멤버변수)에 내용 추가</h2>';
+                console.log(this.cnt);  
+                console.log(this.el);
+            },
+
+            compute: function() {
+                console.log(this.me); 
+                console.log(this.main); //인스턴스.프로퍼티
+                console.log(`오늘의 점심 ${this.me[1]}`);
+                console.log(this.main.student[0].MAT); //인스턴스.프로퍼티.프로퍼티.프로퍼티
+                var student3 = this.main.student[3];
+                var tot = student3.KOR + student3.ENG + student3.MAT;                
+                console.log(student3.이름 + '의 총점 : '+ tot);  //ECMA Script 5 [ES5]
+                console.log(`${student3.이름}의 총점 : ${tot}`); //ES6
+                console.log(this.main.address[1].주소);
+
+            },
+
+            run: function() {
+                this.init();
+                this.compute();
+                this.addrTable();
+                this.studentTable();
+            }
+        } 
+
+        console.log(vueInstance.cnt);
+        vueInstance.run();
+        console.log(vueInstance.cnt);
+
+        var objProject = {
+            a: 100,
+            el: '뷰프레임워크',
+            data: {
+                arr: [
+                    { 번호:1, 이름:'이순신', KOR:100, ENG:090, MAT:095 }, 
+                    { 번호:2, 이름:'박순실', KOR:090, ENG:093, MAT:091 },
+                    { 번호:3, 이름:'이혁재', KOR:080, ENG:091, MAT:092 }
+                ]
+            },
+            method1: function() {
+                this.a = 50000000;                
+                console.log(this.a);
+            },
+            method2: function() {
+                this.el += ' 자바스크립트 라이브러리'
+                console.log(this.el);
+            },
+            method3: function() {
+                var beforeKor = this.data.arr[1].KOR;
+                console.log(this.data.arr);
+                this.data.arr[1].KOR = 100
+                console.log(`${this.data.arr[1].이름}의 국어점수는 ${beforeKor} ==> ${this.data.arr[1].KOR}로 수정되었습니다.`);
+            },
+            method4: function() {
+                var txt = ''
+                var $table2 = document.querySelector('#table2');
+                txt = '<tr><th>번호</th><th>이름</th><th>KOR</th><th>ENG</th><th>MAT</th></tr>';
+                this.data.arr.forEach(function(el, index, arr){
+                    txt += '<tr><td>'+el.번호+'</td><td>'+el.이름
+                        +'</td><td>'+el.KOR+'</td><td>'+el.ENG+'</td><td>'+el.MAT+'</td></tr>';
+                }); 
+                $table2.innerHTML = txt;
+            },
+            init: function() {
+                this.method1();
+                this.method2();
+                this.method3();
+                this.method4();
+            },
+        };
+
+        objProject.init();
+
+    </script>
+
+
+
+
 </body>
 </html>
