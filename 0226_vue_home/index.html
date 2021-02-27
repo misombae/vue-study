@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title> 과제 </title>
+    <script src="./vue/lib/vue.js"></script>
+
+    <style>
+        table {width: 1000px; margin: 0 auto;}
+        table td, th{border: 1px solid #ccc; height: 50px; text-align: center;}
+        table#table td:nth-child(2){text-align: left;}
+    </style>
+</head>
+<body>
+    
+    <h1>v-for 연습</h1>
+    <div id='table'>
+		<table>
+			<tr><th>이름</th><th>주소</th></tr>
+			<tr v-for='data in address'><td>{{data.이름}}</td><td>{{data.주소}}</td></tr>
+		</table>
+	</div>
+	<hr>
+	<div id='table1'>
+		<table>
+			<tr><th>번호</th><th>이름</th><th>KOR</th><th>ENG</th><th>MAT</th></tr>
+			<tr v-for='data in student'><td>{{data.번호}}</td><td>{{data.이름}}</td><td>{{data.KOR}}</td><td>{{data.ENG}}</td><td>{{data.MAT}}</td></tr>
+		</table>
+	</div>
+	<hr>
+	<div id='table2'>
+        <p v-for='data in menu'> {{data}} </p>
+	</div>
+	
+    <script>
+       var model = {
+            menu: ['피자', '닭칼국수', '김밥', '라면', '스파게티'], 
+            student: [ 
+                { 번호:1, 이름:'이순신', KOR:100, ENG:090, MAT:095 }, 
+                { 번호:2, 이름:'박순실', KOR:090, ENG:093, MAT:091 },
+                { 번호:3, 이름:'이혁재', KOR:080, ENG:091, MAT:092 },
+                { 번호:4, 이름:'조지현', KOR:070, ENG:092, MAT:093 },
+                { 번호:5, 이름:'홍우현', KOR:100, ENG:094, MAT:094 }
+            ],
+            address: [
+                { 이름:'이순신', 주소:'서울시 서초구 서초동 송림빌딩 1번지'},
+                { 이름:'박순실', 주소:'서울시 서초구 서초동 송림빌딩 2번지'},
+                { 이름:'이혁재', 주소:'서울시 서초구 서초동 송림빌딩 3번지'},
+                { 이름:'조지현', 주소:'서울시 서초구 서초동 송림빌딩 4번지'},
+                { 이름:'홍우현', 주소:'서울시 서초구 서초동 송림빌딩 5번지'},
+            ]
+       };
+
+	   var obj = new Vue({
+		   el: '#table',
+		   data: model
+	   });
+       var obj1 = new Vue({
+           el: '#table1',
+           data: model
+       });
+       var obj2 = new Vue({
+            el: '#table2',
+            data: model
+       });
+    </script>
+
+</body>
+</html>
