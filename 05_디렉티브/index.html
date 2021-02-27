@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>v-on, v-if, v-bind, v-model</title>
+    <script src="./vue/lib/vue.js"></script>
+    <style>
+        #app {text-align: center;}
+        img {width: 200px;}
+        #fruit {padding: 10px 30px;}
+        #idirum {width: 200px; height: 50px; border: 1px solid #ccc; background: #f6f6f6; padding: 7px 15px;}
+    </style>
+</head>
+<body>
+
+    <div id="app">
+        <!-- v-if -->
+        <h1> a의 값: {{a}} / b의 값: {{b}}</h1>
+        <!-- 블록은 디렉티브의 표현식이 true값을 반환할 때만 렌더링 됩니다. -->
+        <h2 v-if='a'>조건문이 참인 경우 </h2>
+        <h2 v-if='b'>조건문이 거짓인 경우 </h2>
+        <hr>
+
+        <!-- v-bind : -->
+        <h3><a v-bind:href='url2' v-bind:title='title1'>Vue.js 사이트 가기</a></h3> <!-- href속성을 바인딩 -->
+        <h3><a v-bind:href='url1'> jquery.js 사이트 가기</a></h3> 
+        <h3><img v-bind:src='imgurl1' v-bind:alt='imgalt1' v-bind:title="imgTitle1"></h3> <!--img 속성 바인딩-->
+        <h3><img v-bind:src='imgurl2'></h3> <!--img 속성 바인딩, alt:이미지가 없을경우 대신하는 속성-->
+        <h3><img :src='imgurl2'></h3> <!--v:bind 는 : 로 대체 가능-->
+        <hr>
+
+        <h2>오늘의 날짜는 : {{ nowDate }}</h2>
+        <h2>오늘의 날짜는 : {{ nowDate.getFullYear() }} - {{ nowDate.getMonth()+1 }} - {{ nowDate.getDate() }}  {{ nowDate.getDay()}} </h2>
+        <hr>
+
+        <!-- v-model: 양방향 데이터 바인딩 생성 -->
+        <h2>셀렉트 박스 옵션 선택 v-model</h2>
+        <select name="fruit" id="fruit" v-model="select">  
+            <option value="">좋아하는 과일을 선택하세요!</option>
+            <option value="딸기">딸기</option>
+            <option value="사과">사과</option>
+            <option value="바나나">바나나</option>
+            <option value="자몽">자몽</option>
+            <option value="수박">수박</option>
+            <option value="망고">망고</option>
+        </select>
+        <h3>선택 옵션은 : {{ select }}</h3>
+        <hr>
+
+        <h2> 체크박스 v-model </h2>
+        <div class="check-box">
+            <input type="checkbox" name="chk1" id="idchk1" value="운동" v-model="check"><label for="idchk1">운동</label>
+            <input type="checkbox" name="chk2" id="idchk2" value="등산" v-model="check"><label for="idchk2">등산</label>
+            <input type="checkbox" name="chk3" id="idchk3" value="사진" v-model="check"><label for="idchk3">사진</label>
+            <input type="checkbox" name="chk4" id="idchk4" value="낚시" v-model="check"><label for="idchk4">낚시</label>
+            <input type="checkbox" name="chk5" id="idchk5" value="캘리그라피" v-model="check"><label for="idchk5">캘리그라피</label>
+        </div>
+        <h3>취미 생활 항목 : {{ check }}</h3>
+        <hr>
+
+        <h2> 라디오 버튼 v-model</h2>
+        <div class="radio-box">
+            <input type="radio" name="chk" id="chk1" value="여성" v-model="gender"><label for="chk1">여성</label>
+            <input type="radio" name="chk" id="chk2" value="남성" v-model="gender"><label for="chk2">남성</label>
+            <input type="radio" name="chk" id="chk3" value="중성" v-model="gender"><label for="chk3">중성</label>
+        </div>
+        <h3>선택 항목 : {{ gender }}</h3>
+        <hr>
+
+        <h2>라디오버튼 v-if ~ v-else-if ~ v-else</h2>
+        <div class="if-box">
+            <ul>
+                <li v-if='cho1'>자장면</li>
+                <li v-else-if='cho2'>탕수육</li>
+                <li v-else>팔보채</li>
+            </ul>
+        </div>
+        <hr>
+
+        <!-- v-on v-show -->
+        <h2>입력 상자 텍스트를 이용한 응용 v-model</h2>
+        <div class="text-box">
+            <label for="idirum">회원이름</label>
+            <input type="text" name="irum" id="idirum" v-model='value' @keyup='eventFn'>
+            <h2>{{value}}</h2>
+            <h3 v-show='x'>회원이름을 입력하세요.</h3>
+        </div>
+
+        <br><br><br><br><br>
+    </div>
+
+
+    <script>
+        const obj = new Vue({
+            el: '#app',
+            data: {
+                a: true,
+                b: false,
+                url1: 'https://jquery.com/',
+                url2: 'https://vuejs.org/',
+                imgurl1: './img/logo.png',
+                imgurl2: './img/fruit.jpg',
+                imgalt1: '이미지가 없습니다',
+                title1: 'Vue.js 바로가기',
+                imgTitle1: '달달한 딸기',
+                nowDate: new Date(),
+                select:'',
+                check:[], //선택 사항 배열로 지정 
+                gender:'',
+                cho1: false,
+                cho2: false,
+                value: '',
+                x:true
+            },
+            methods: {
+                eventFn: function() {
+                    if(this.value != ''){
+                        this.x = false;
+                    }else{
+                        this.x = true;
+                    }
+                }
+            }
+        });
+    </script>
+
+</body>
+</html>
