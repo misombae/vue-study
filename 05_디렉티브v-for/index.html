@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>v-for</title>
+    <script src="./vue/lib/vue.js"></script>
+    <style>
+      
+    </style>
+</head>
+<body>
+    
+    <!-- 
+        헤딩은 데이터에 정의된 멤버변수를 활용한다.
+        웹문서에 고객 이름을 순서 있는 목록에 반복 출력 합니다.
+        그리고 데이터는 뷰의 데이터 속성에 객체 배열로된 데이터를 활용합니다.
+    -->
+
+    <div id="member">
+        <h1>{{title}}</h1>
+        <ul>
+            <li v-for='el, index in memberList'>{{ index +1 }}. 이름: {{el.name}}  전화번호: {{el.tel}}</li>
+        </ul>
+    </div>
+
+    <script>
+        const member = new Vue({
+            el: '#member',
+            data: {
+                title: '정기 고객 리스트',
+                memberList: [
+                    {'name':'강민경','tel':'010-7942-5301'},
+                    {'name':'고한나','tel':'010-7942-5302'},
+                    {'name':'김근용','tel':'010-7942-5303'},
+                    {'name':'박나리','tel':'010-7942-5304'},
+                    {'name':'배수빈','tel':'010-7942-5305'},
+                    {'name':'서혜리','tel':'010-7942-5306'},
+                    {'name':'유지연','tel':'010-7942-5307'},
+                    {'name':'윤용준','tel':'010-7942-5308'},
+                    {'name':'임하리','tel':'010-7942-5309'},
+                    {'name':'정예진','tel':'010-7942-5300'},
+                ]
+            }
+        });
+    </script>
+
+</body>
+</html>
