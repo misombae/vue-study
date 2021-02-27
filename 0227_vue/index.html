@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>디렉티브 v-for 반복문</title>
+    <title>뷰 컴포넌트</title>
     <script src="./vue/lib/vue.js"></script>
 
     <style>
@@ -24,18 +24,6 @@
             <tr v-for='el in addr'><td>{{ el.이름 }}</td><td>{{ el.휴대폰 }}</td></tr>
         </table>
         <main-component></main-component>
-    </div>
-
-    <div id="main">
-        <h1> 새로운 영역</h1>
-        <ol>
-            <li>내용1</li>
-            <li>내용2</li>
-            <li>내용3</li>
-            <li>내용4</li>
-            <li>내용5</li>
-            <li>내용6</li>
-        </ol>
     </div>
 
     <!-- vue.js -->
@@ -60,15 +48,7 @@
             created: {},
             beforeUpdate: {}
         });
-        
-        var main = new Vue({ //뷰인스턴스
-            el: '#main', //root
-            data: { //root data 속성
-                no: 0
-            },
-        });
     </script>
 
-   
 </body>
 </html>
