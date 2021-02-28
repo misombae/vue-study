@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>컴포넌트 전역컴포넌트 템플릿_상위컴포넌트에서 하위 컴포넌트 통신</title>
+    <script src="./vue/lib/vue.js"></script>
+
+    <style>
+        #wrapper {width: 1200px; margin:0 auto; text-align: center; background: #f0f0f0;}
+        #wrapper #header h1{color: #000;}
+        #wrapper #header h2{color: #279;}
+        #wrapper #header h2 mark{background: #af5;}
+    </style>
+
+</head>
+<body>
+<div id="wrapper">
+    <div id="header">
+        <h1> {{msg}} </h1>
+        <!--상위 컴포넌트에서 하위 컴포넌트에게 통신은 properties(속성) props 이용하여 전달-->
+        <!--하위 컴포넌트에서 상위 컴포넌트에게 통신은 event(이벤트) $emit 이용하여 전달-->
+
+        <!-- v-bind:href='url2' -->
+        <nav-component v-bind:txtbind='txt'></nav-component> <!-- JSX 사용자 정의 태그 컴포넌트 이름 (상위컴포넌트)-->
+    </div>
+    
+    <script>
+    
+        // 전역 컴포넌트 생성
+        Vue.component('nav-component', {
+            props: ['txtbind'], //바인딩(v-bind:속성)으로 전달받을 속성 지정
+            template: '<h2><mark>{{ txtbind }}</mark></h2>' //(하위컴포넌트)
+        }); 
+
+        // 뷰 인스턴스 생성 
+        var header = new Vue({
+            el: '#header',
+            data:{
+                msg: '컴포넌트 생성',
+                txt: '상위컴포넌트에서 하위 컴포넌트로 통신성공!!'
+            },
+        });
+
+
+    
+    </script>
+</div>
+
+</body>
+</html>
