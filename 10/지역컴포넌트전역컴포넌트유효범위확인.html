@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>컴포넌트 지역컴포넌트 템플릿</title>
+    <script src="./vue/lib/vue.js"></script>
+
+    <style>
+        #wrap {width: 1200px; margin:0 auto; text-align: center; background: #f0f0f0;}
+        #wrap #app h1{color: #571}
+        #wrap #app h2{color: #279;}
+        #wrap #app h2 mark{background: #af5;}
+    </style>
+
+</head>
+<body>
+<div id="wrap">
+ 
+    <div id="app">
+        <my-component1></my-component1>
+        <my-component2></my-component2>
+        <my-component3></my-component3>
+        <my-component4></my-component4>
+    </div>
+    <hr>
+    <div id="app2">
+        <my-component1></my-component1>
+        <my-component2></my-component2>
+        <my-component3></my-component3>
+        <my-component4></my-component4>
+    </div>
+
+    <script>
+        Vue.component('my-component4', {
+            template:'<h1><mark>전역</makr></h1>'
+        })
+
+        var myComponent1 = {template: '<h1>component1</h1>'}
+        var myComponent2 = {template: '<h2>component2</h2>'}
+        var myComponent3 = {template: '<h2>component3</h2>'}
+
+        var app = new Vue({
+            el: '#app',
+            data:{
+                'comp1': 'comp1'
+            },
+            components: {
+                'my-component1': myComponent1,
+                'my-component2': myComponent2,
+                'my-component3': myComponent3
+            }
+        });
+
+        var app2 = new Vue({
+            el: '#app2',
+            components : {
+                'my-component1': myComponent1,
+            }
+        });
+    </script>
+</div>
+
+</body>
+</html>

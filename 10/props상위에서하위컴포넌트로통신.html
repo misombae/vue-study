@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>컴포넌트 지역컴포넌트 템플릿</title>
+    <script src="./vue/lib/vue.js"></script>
+
+    <style>
+        #wrap {width: 1200px; margin:0 auto; text-align: center; background: #f0f0f0;}
+        #wrap h1{color: #839;}
+        #wrap h2{color: #279;}
+        #wrap h2 mark{background: #af5;}
+    </style>
+
+</head>
+<body>
+<div id="wrap">
+   <div id="app">
+        <h1>상위 컴포넌트에서 하위 컴포넌트로 통신: PROPS 사용 합니다.</h1>
+        <app-comp v-bind:propsdata='num'></app-comp> <!--상위컴포넌트의 html코드 -->
+   </div>
+    <!--상위컴포넌트 Root의 값이 변경되면 하위 컴포넌트에 전달된다. -->
+    <script>
+        var appComp = { //하위컴포넌트
+            props: ['propsdata'],
+            template: '<h2>지역컴포넌트 템플릿 내용: {{ propsdata }}</h2>'
+        }
+
+        var app = new Vue({ //상위컴포넌트
+            el: '#app',
+            data: {
+                num: 1000000 
+            },
+            components: {
+                'app-comp': appComp
+            }
+        })
+    </script>
+</div>
+
+</body>
+</html>

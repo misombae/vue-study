@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>컴포넌트 지역컴포넌트 템플릿</title>
+    <script src="./vue/lib/vue.js"></script>
+
+    <style>
+        #wrap {width: 1200px; margin:0 auto; background: #f0f0f0;}
+        #wrap h1{color: #839;}
+        #wrap h2{color: #279;}
+        #wrap h2 mark{background: #af5;}
+    </style>
+
+</head>
+<body>
+<div id="wrap">
+    <div id="app">
+        <food-component :propsdata='item' v-for='item in menu'></food-component>
+    </div>
+
+    <script>
+
+        var app = new Vue({
+            el: '#app',
+            data: {
+                menu: [
+                    {'요일':'월', '음식':'피자'},
+                    {'요일':'화', '음식':'탕수육'},
+                    {'요일':'수', '음식':'삼겹살'},
+                    {'요일':'목', '음식':'떡볶이'},
+                    {'요일':'금', '음식':'치즈김밥'}
+                ]
+            },
+            components: {
+                'food-component': {
+                    props:['propsdata'],
+                    template: '<h2> {{propsdata.요일}} : {{propsdata.음식}} </h2>'
+                },
+
+            }
+        });
+
+    </script>
+
+</div>
+
+</body>
+</html>

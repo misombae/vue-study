@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>컴포넌트 지역컴포넌트 템플릿</title>
+    <script src="./vue/lib/vue.js"></script>
+
+    <style>
+        #wrap {width: 1200px; margin:0 auto; background: #f0f0f0;}
+        #wrap h1{color: #839;}
+        #wrap h2{color: #279;}
+        #wrap h2 mark{background: #af5;}
+    </style>
+
+</head>
+<body>
+<div id="wrap">
+    
+    <div id="food">
+        <h2>지역 컴포넌트 객체 배열 데이터 props 이용한 통신</h2>
+        <ol>
+            <data-comp v-bind:propsdata='item' v-for='item in foodData'></data-comp>
+        </ol>
+    </div>
+
+    <script>
+        var dataComp = {
+            props:['propsdata'],
+            template: '<li> {{ propsdata.id }}, &nbsp; {{ propsdata.name }}</li>'
+        }
+
+        var food = new Vue({
+            el: '#food',
+            data: {
+                foodData: [
+                    {id:'P00', name: '피자'}, 
+                    {id:'P01', name: '고추잡채'}, 
+                    {id:'P02', name: '부대찌개'}, 
+                    {id:'P03', name: '마녀김밥'}, 
+                    {id:'P04', name: '떡라면'}
+                ]
+            },
+            components:{
+                'data-comp': dataComp
+            }
+        });
+    </script>
+</div>
+
+</body>
+</html>

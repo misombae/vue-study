@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>컴포넌트 지역컴포넌트 템플릿</title>
+   
+    <link rel="stylesheet" href="./css/reset.css">
+    <link rel="stylesheet" href="./css/style.css">
+   
+    <script src="./vue/lib/vue.js"></script>
+
+
+</head>
+<body>
+<div id="wrap">
+
+    <div id="header">
+        <div class="wrap">
+            <div class="gap">
+                <div class="container">
+                    <!-- logo -->
+                    <logo-component></logo-component> 
+                    <!-- Navigation -->
+                    <nav-component :propsnav='item' v-for='item in gnb'></nav-component> 
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <script>
+        var logoComponent = {
+            props:['propslogo'],
+            template: '\
+                <div class="log">\
+                    <a href="javascript:" class="log-btn">\
+                        <img src="./img/logo_image.png" alt="logo">\
+                    </a>\
+                </div> \
+            '
+        }
+        var navComponent = {
+            props:['propsnav'],
+            template: '\
+                <nav id="nav">\
+                    <ul>\
+                        <li><a href="javascript:" class="main-btn">{{ propsnav.menu }}</a></li>\
+                    </ul>\
+                </nav>\
+            '
+        }
+
+        var header = new Vue({
+            el: '#header',
+            data: {
+                gnb: [
+                    {menu:'ABOUT'},
+                    {menu:'PORTFOLIO'},
+                    {menu:'SERVICES'},
+                    {menu:'TESTIMONIAL'},
+                    {menu:'BLOG'},
+                    {menu:'CONTACT'}
+                ]
+            },
+            components:{
+                'logo-component': logoComponent,
+                'nav-component': navComponent,
+            }
+        });        
+    </script>
+
+
+    <div id="main">
+        <section1-component></section1-component>
+    </div>
+
+    <script>
+
+        var section1Component = {
+            props:['propssection1'],
+            template: '\
+                <section id="section1">\
+                    <div class="wrap">\
+                        <div class="gap">\
+                            <div class="container">\
+                                <h4>WE WORK HARD, WE PLAY HARD</h4>\
+                                <h2>SALIENT IS DIGITAL <br> BRILLIANCE</h2>\
+                                <h3>CREATIVE SOLUTIONS TO IMPROVE YOUR BUSINESS</h3>\
+                                <p><span><a href="javascript:">OUR SERVICES</a></span></p>\
+                            </div>\
+                        </div>\
+                    </div>\
+                </section>\
+            '
+        }
+
+        var main = new Vue({
+            el: '#main',
+            components:{
+                'section1-component': section1Component
+            }
+        });
+
+    </script>
+
+
+</div>
+</body>
+</html>
