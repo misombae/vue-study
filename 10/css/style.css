@@ -8,7 +8,7 @@
 #wrap #header .wrap .gap .container::after {content:'';display:block;clear:both;}
 
 /* logo */
-#wrap #header .wrap .gap .container .logo {float:left;line-height:75px;}
+#wrap #header .wrap .gap .container .logo {float:left;line-height:75px;width: 10%}
 #wrap #header .wrap .gap .container .logo a {display:inline-block;line-height:100%;}
 #wrap #header .wrap .gap .container .logo a img {width:155px;}
 
