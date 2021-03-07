@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title></title>
+
+    <link rel="stylesheet" href="./css/reset.css">
+    <link rel="stylesheet" href="./css/style.css">
+
+    <script src="./js/lib/jquery.min.js"></script>    
+    <script src="./vue/lib/vue.js"></script>
+
+</head>
+<body>
+<div id="wrap">
+
+    <!-- header -->
+    <div id="header">
+        <div class="wrap">
+            <div class="gap">
+                <div class="container">
+                    
+                    <!-- logo template  -->
+                    <logo-component v-for='item in logo' v-bind:propslogo='item'></logo-component>
+
+                    <!-- Navigation template -->
+                    <nav id="nav">
+                        <ul>
+                            <nav-component v-for='item in gnb' :propsnav='item'></nav-component>
+                        </ul>
+                    </nav>
+                </div>
+            </div>
+        </div>             
+    </div>    
+                       
+
+    <script>
+        var logoComponent = {
+            props:['propslogo'],
+            template:'\
+                <div class="logo">\
+                    <a href="javascript:" class="logo-btn">\
+                        <img v-bind:src="propslogo.img" alt="logo">\
+                    </a>\
+                </div>\
+                '
+        }
+
+        var navComponent = {
+            props:['propsnav'],
+            template:'\
+                <nav id="nav">\
+                    <ul>\
+                        <li><a href="javascript:" class="main-btn">{{ propsnav.menu }}</a></li>\
+                    </ul>\
+                </nav>\
+            '
+        }
+
+        var header = new Vue({
+            el:'#header',
+            data:{
+                logo:[{img:'./img/logo_image.png'}],
+                gnb:[
+                    {menu:'ABOUT'},
+                    {menu:'PORTFOLIO'},
+                    {menu:'SERVICES'},
+                    {menu:'TESTIMONIAL'},
+                    {menu:'BLOG'},
+                    {menu:'CONTACT'}
+                ]
+            },
+            components:{
+                'logo-component': logoComponent,
+                'nav-component': navComponent
+            }
+        });
+    </script>
+
+  
+
+
+
+    <!-- main  -->
+    <div id="main">      
+        <section1-component v-on:emitevent='updateFiledata' :propssection1='filedata'></section1-component>
+    </div>
+
+
+    <script>
+        var section1Component = {
+            props:['propssection1'],
+            template:'\
+                <section id="section1">\
+                    <div class="wrap">\
+                        <div class="gap">\
+                            <div class="container">\
+                                <h4>WE WORK HARD, WE PLAY HARD</h4>\
+                                <h2>\
+                                    SALIENT IS DIGITAL<br>\
+                                    BRILLIANCE\
+                                </h2>\
+                                <h3>CREATIVE SOLUTIONS TO IMPROVE YOUR BUSINESS</h3>\
+                                <h3>filedata 결과 : {{ propssection1 }} </h3>\
+                                <p>\
+                                    <span>\
+                                        <a href="javascript:" @click="popup(\'./popup/main\'+propssection1+\'.html\' ,\'Window Popup \'+propssection1+\'\')">\
+                                            OUR SERVICES\
+                                        </a>\
+                                    </span>\
+                                </p>\
+                            </div>\
+                        </div>\
+                    </div>\
+                </section>\
+            ',
+            methods:{ //1. 하위컴포넌트의 이벤트는 해당 컴포넌트 안에 메소드를 만들어야 한다. 상위 컴포넌트(인스턴스)에 메소드를 생성시 하위에서 상위로는 통신 불가 
+                popup: function(url, name) {
+
+                    /* 
+                        1. 하위컴포넌트에서 이벤트(click)를 발생시켜 ==> 하위 컴포넌트에 methods 생성 
+                        2. 상위 컴포넌트에 데이터 속성(filedata)의 값을 변경하고 
+                                ==> 상위 컴포넌트에 이벤트를 전달할 이벤트이름을 생성하고, 생성된 이름을 상위 컴포넌트의 데이터 속성에 할당하고 활성화한다.==> $emit
+                        3. 상위컴포넌트의 변경된 값을 다시 하위 컴포넌트로 내려받는다. ==> props
+                    */
+
+                    //2. 
+                    this.$emit('emitevent'); //상위컴포넌트에 전달하기 위해서 에밋 메소드에 emitEvent라는 이름을 생성 
+                    
+                    var option = "width=800, height=500, top=0, left=300";
+                    window.open(url, name, option);
+                    //location.href=name;
+                }
+            },
+            mounted: function() { //화면에 부착이 완료된 상태 
+                //반응형 제작
+                /*1. 창 너비(css에 이미 적용)와 창높이를 반응형에 적용
+                     섹션1의 창높이와 창 너비를 설정한다. 
+                     화면 크기가 변경 시 즉시 반응(resize 이벤트 리스너)하여 적용되도록 한다. */
+                var $winH;
+                var $section1 = document.querySelector('#section1');
+
+                function resizeFn() {
+                    $winH = window.innerHeight; //창높이
+                    $section1.style.height = $winH + 'px'; //$section1.style = 'height:' + $winH + 'px';
+                }
+
+                resizeFn();//마운트 완료시 실행 1회
+                window.addEventListener('resize', resizeFn); //창크기가 변경되면 반응
+
+                /*jquery
+                var section1 = $('#section1');
+                var winH = $(window).innerHeight();
+
+                function resizeFn() {
+                    winH = $(window).innerHeight();
+                    section1.css({height:winH});
+                }
+                resizeFn();
+                $(window).resize(function(){
+                    resizeFn();
+                });
+                */
+            }
+        }
+
+        var main = new Vue({
+            el:'#main',
+            data:{
+                filedata:100
+            },
+            components:{
+                'section1-component': section1Component
+            },
+            methods:{
+                updateFiledata: function() {
+                    if(this.filedata > 200) {
+                        this.filedata = 100;
+                    }else{ 
+                        this.filedata += 100;
+                    }
+                }
+            }
+        });
+
+    </script>
+
+  
+
+   
+</div>
+</body>
+</html>
