@@ -1,0 +1,18 @@
+{
+    "info":[
+        {"name":"이순신", "age":31, "email":"aaa@naver.com"},
+        {"name":"김유신", "age":32, "email":"aab@naver.com"},
+        {"name":"강감찬", "age":33, "email":"aac@naver.com"},
+        {"name":"이혁수", "age":34, "email":"aad@naver.com"},
+        {"name":"차분희", "age":35, "email":"aae@naver.com"},
+        {"name":"강미니", "age":36, "email":"aaf@naver.com"}
+    ],
+    "address":[
+        {"name":"이순신", "addr": "서울시 서초고 서초동 송리빌딩"},
+        {"name":"김유신", "addr": "서울시 서초고 서초동 송리빌딩"},
+        {"name":"강감찬", "addr": "서울시 서초고 서초동 송리빌딩"},
+        {"name":"이혁수", "addr": "서울시 서초고 서초동 송리빌딩"},
+        {"name":"차분희", "addr": "서울시 서초고 서초동 송리빌딩"},
+        {"name":"강미니", "addr": "서울시 서초고 서초동 송리빌딩"}
+    ]
+}
