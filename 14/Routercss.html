@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Vue Router</title>
+<link rel="stylesheet" href="./css/reset.css">
+<link rel="stylesheet" href="./css/style.css">
+
+<script src="./vue/lib/vue.js"></script>
+<script src="./vue/lib/axios.min.js"></script>
+<script src="./vue/lib/vue-router.js"></script>
+
+
+</head>
+<body>
+<div id="routerWrap">
+    <div id="app">
+        <div id="header">
+            <h1 class="logo">Vue Router</h1>
+            <nav class="nav">
+                <ul>
+                    <li>
+                        <router-link to='/home'>HOME</router-link> <!--router-link: 실행시 a링크로 변경됨 to='routes의 path 경로'-->
+                        <router-link to='/main'>MAIN</router-link>
+                    </li>
+                </ul>
+            </nav>    
+        </div>
+        <div id="content">
+            <router-view></router-view><!--router-view: 클릭할경우 출력되는 화면-->
+        </div>    
+    </div>
+
+
+<script>
+
+    var homeComponent = {
+        template:"<div id='home' class='comp'><h2>Home 홈 인트로 페이지</h2></div>"
+    }
+
+    var mainComponent = {
+        template:"\
+            <div id='main' class='comp'><h2>Main 메인 페이지</h2></div>\
+            "
+    }
+
+    //라우터 객체 생성
+    var routerObj = new VueRouter({
+        routes:[ //페이지 나열
+            {path: '/home', component:homeComponent}, //경로와 연결할 컴포넌트 이름
+            {path: '/main', component:mainComponent}
+        ]
+    });
+
+    //뷰 객체 생성
+    var app = new Vue({
+        router: routerObj, 
+        data: {
+            msg: '페이지이동'
+        }
+    }).$mount('#app');
+
+</script>
+
+</div>
+</body>
+</html>
