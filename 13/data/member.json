@@ -1,0 +1,15 @@
+{
+    "member":[
+        {"userId":"이순신", "userPw":"123456", "email":"aaa@naver.com"},
+        {"userId":"김유신", "userPw":"123456", "email":"aab@naver.com"},
+        {"userId":"강감찬", "userPw":"123456", "email":"aac@naver.com"},
+        {"userId":"이혁수", "userPw":"123456", "email":"aad@naver.com"},
+        {"userId":"차분희", "userPw":"123456", "email":"aae@naver.com"},
+        {"userId":"강미니", "userPw":"123456", "email":"aaf@naver.com"},
+        {"userId":"abc", "userPw":"123456", "email":"abc@naver.com"},
+        {"userId":"def", "userPw":"123456", "email":"def@naver.com"},
+        {"userId":"ghi", "userPw":"123456", "email":"ghi@naver.com"},
+        {"userId":"jkl", "userPw":"123456", "email":"jkl@naver.com"},
+        {"userId":"mno", "userPw":"123456", "email":"mno@naver.com"}
+    ]
+}

@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<link rel="stylesheet" href="./css/reset.css">
+<link rel="stylesheet" href="./css/style.css">
+
+<script src="./vue/lib/vue.js"></script>
+<script src="./vue/lib/axios.min.js"></script>
+
+
+</head>
+<body>
+<div id="wrap">
+
+
+    <div id="app">
+        <h1> 회원관리 </h1>
+        <table class="member">
+            <tr>
+                <th>번호</th>
+                <th>ID</th>
+                <th>PASSWORD</th>
+                <th>EMAIL</th>
+            </tr>    
+            <tr v-for='item, index in arr'>
+                <td>{{index+1}}</td>
+                <td>{{item.userId}}</td>
+                <td>{{item.userPw}}</td>
+                <td>{{item.email}}</td>
+            </tr>    
+        </table>
+
+        <div class="button-wrap">
+            <button @click.prevent='axiosJsonFn'>회원 출력</button>
+        </div>
+    </div>
+
+
+<script>
+
+    var app = new Vue({
+        el:'#app',
+        data:{
+            arr:[]
+        },
+        methods: {
+            axiosJsonFn: function(){
+                var url = './data/member.json'
+                axios.get(url)
+                    .then((response) => {
+                        this.arr = response.data.member;
+                        
+                        response.data.member.forEach(function(row, idx, arr){
+                            //row.userId == response.data.member[idx].userId
+                            console.log(response.data.member[idx].userId); 
+                            console.log(row.userId + " / " + row.userPw + " / " +row.email);
+                        });
+                    })
+            },
+        }
+    })
+</script>
+
+</div>
+</body>
+</html>
